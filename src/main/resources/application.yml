@@ -1,0 +1,2 @@
+resource:
+  submissions: https://api.pushshift.io/reddit/search/submission
