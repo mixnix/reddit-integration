@@ -1,6 +1,7 @@
 package com.mixnix.redditintegration.controller;
 
 import com.mixnix.redditintegration.api.pushshift.PushshiftService;
+import com.mixnix.redditintegration.api.pushshift.RedditResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class RedditSubmissionController {
     private final PushshiftService pushshiftService;
 
     @GetMapping
-    public ResponseEntity getMemes(@RequestParam String searchQuery){
+    public ResponseEntity<RedditResponseDTO> getMemes(@RequestParam String searchQuery){
         log.info("GET /api/memes/?subredditName={}", searchQuery);
 
         return ResponseEntity.ok().body(pushshiftService.findByQuery(searchQuery));

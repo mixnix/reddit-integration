@@ -1,5 +1,5 @@
 package com.mixnix.redditintegration.api.pushshift;
 
 public interface PushshiftService {
-    RedditDataDTO findByQuery(String queryString);
+    RedditResponseDTO findByQuery(String queryString);
 }
