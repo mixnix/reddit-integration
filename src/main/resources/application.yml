@@ -1,2 +1,13 @@
 resource:
   submissions: https://api.pushshift.io/reddit/search/submission
+  reddit:
+    authorization: https://www.reddit.com/api/v1/access_token
+    submissions: https://oauth.reddit.com/search
+
+
+
+reddit:
+  username: ${username}
+  password: ${password}
+  app-id: ${app-id}
+  app-secret: ${app-secret}
