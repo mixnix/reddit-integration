@@ -10,6 +10,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolationException;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,10 +39,12 @@ public class RedditSubmissionController {
 
     @GetMapping
     public ResponseEntity<RedditResponseDTO> getMemes(
-            @RequestParam @NotEmpty(message = "Query string shouldn't be empty") String searchQuery
+            @RequestParam @NotEmpty(message="Query string shouldn't be empty") String searchQuery,
+            @RequestParam @Min(value=1, message="Minimum page size is 1")
+                @Max(value=100, message="Maximum page siez is 100") int pageSize
     ){
         log.info("GET /api/memes/?subredditName={}", searchQuery);
 
-        return ResponseEntity.ok().body(pushshiftService.findByQuery(searchQuery));
+        return ResponseEntity.ok().body(pushshiftService.findByQuery(searchQuery, pageSize));
     }
 }
