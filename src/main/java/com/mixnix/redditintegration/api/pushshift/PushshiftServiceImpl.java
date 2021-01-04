@@ -4,13 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 public class PushshiftServiceImpl implements PushshiftService{
 
     private final RestTemplate restTemplate;
+
+    private final RedditDataDTOConverter redditDataDTOConverter;
 
     public RedditResponseDTO findByQuery(String queryString, int pageSize) {
         // query string can be anything because it searches by title and post content
@@ -19,7 +19,6 @@ public class PushshiftServiceImpl implements PushshiftService{
 
         RedditDataDTO redditDataDTO = restTemplate.getForObject(subredditSubmissionWithQuery, RedditDataDTO.class,
                 pageSize, queryString);
-        return new RedditResponseDTO(redditDataDTO.getData().stream().map(RedditSubmissionDTO::getUrl)
-                .collect(Collectors.toList()));
+        return redditDataDTOConverter.convertToRedditResponseDTO(redditDataDTO);
     }
 }
