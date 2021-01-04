@@ -40,7 +40,8 @@ public class RedditSubmissionController {
     @GetMapping
     public ResponseEntity<RedditResponseDTO> getMemes(
             @RequestParam @NotEmpty(message="Query string shouldn't be empty") String searchQuery,
-            @RequestParam @Min(value=1, message="Minimum page size is 1")
+            @RequestParam(defaultValue = "100")
+                @Min(value=1, message="Minimum page size is 1")
                 @Max(value=100, message="Maximum page siez is 100") int pageSize
     ){
         log.info("GET /api/memes/?subredditName={}", searchQuery);
