@@ -1,13 +1,14 @@
 package com.mixnix.redditintegration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mixnix.redditintegration.api.pushshift.*;
+import com.mixnix.redditintegration.api.pushshift.PushshiftServiceImpl;
+import com.mixnix.redditintegration.api.pushshift.RedditDataDTO;
+import com.mixnix.redditintegration.api.pushshift.RedditResponseDTO;
+import com.mixnix.redditintegration.api.pushshift.RedditSubmissionDTO;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -23,7 +24,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//@RestClientTest({PushshiftService.class, RedditIntegrationApplication.class})
 class RedditIntegrationApplicationTests {
 
 	@Autowired
@@ -32,10 +32,10 @@ class RedditIntegrationApplicationTests {
 	@Autowired
 	private PushshiftServiceImpl pushshiftService;
 
-	private MockRestServiceServer server;
-
 	@Autowired
 	private ObjectMapper objectMapper;
+
+	private MockRestServiceServer server;
 
 	@Before
 	public void setUp() throws Exception {
@@ -54,10 +54,8 @@ class RedditIntegrationApplicationTests {
 				.andRespond(withSuccess(detailsString, MediaType.APPLICATION_JSON));
 	}
 
-
 	@Test
 	void contextLoads() {
 		RedditResponseDTO testResponse = pushshiftService.findByQuery("testquery", 100);
 	}
-
 }
