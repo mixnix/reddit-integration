@@ -2,6 +2,7 @@ package com.mixnix.redditintegration.controller;
 
 import com.mixnix.redditintegration.api.pushshift.PushshiftService;
 import com.mixnix.redditintegration.api.pushshift.RedditResponseDTO;
+import com.mixnix.redditintegration.memes.MemesDownloadService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,8 @@ public class RedditSubmissionController {
 
     private final PushshiftService pushshiftService;
 
+    private final MemesDownloadService memesDownloadService;
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ConstraintViolationException.class)
     public Map<String, String> handleValidationExceptions(ConstraintViolationException ex) {
@@ -47,5 +50,17 @@ public class RedditSubmissionController {
         log.info("GET /api/memes/?searchQuery={}", searchQuery);
 
         return ResponseEntity.ok().body(pushshiftService.findByQuery(searchQuery, pageSize));
+    }
+
+    @PostMapping
+    public ResponseEntity<RedditResponseDTO> saveMemestoDatabase(
+            @RequestParam @NotEmpty(message="Memes subreddit shouldn't be empty") String subreddit,
+            @RequestParam(defaultValue = "100")
+            @Min(value=1, message="Minimum page size is 1")
+            @Max(value=100, message="Maximum page siez is 100") int pageSize
+    ){
+        log.info("POST /api/memes/?subredditName={}", subreddit);
+
+        return ResponseEntity.ok().body(memesDownloadService.saveMemesToDatabase(subreddit, pageSize));
     }
 }
