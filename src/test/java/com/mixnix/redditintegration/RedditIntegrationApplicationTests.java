@@ -22,20 +22,16 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 
 @RunWith(SpringRunner.class)
-//@SpringBootTest
-@RestClientTest({PushshiftService.class, RedditIntegrationApplication.class})
+@SpringBootTest
+//@RestClientTest({PushshiftService.class, RedditIntegrationApplication.class})
 class RedditIntegrationApplicationTests {
 
-//	@Autowired
-//	private RestTemplate restTemplate;
+	@Autowired
+	private RestTemplate restTemplate;
 
 	@Autowired
 	private PushshiftServiceImpl pushshiftService;
 
-//	@Autowired
-//	private RestTemplate restTemplate;
-
-	@Autowired
 	private MockRestServiceServer server;
 
 	@Autowired
@@ -43,7 +39,7 @@ class RedditIntegrationApplicationTests {
 
 	@Before
 	public void setUp() throws Exception {
-//		server = MockRestServiceServer.createServer(restTemplate);
+		server = MockRestServiceServer.createServer(restTemplate);
 
 		String detailsString =
 				objectMapper.writeValueAsString(new RedditDataDTO(new ArrayList<RedditSubmissionDTO>(
@@ -62,8 +58,6 @@ class RedditIntegrationApplicationTests {
 	@Test
 	void contextLoads() {
 		RedditResponseDTO testResponse = pushshiftService.findByQuery("testquery", 100);
-		System.out.println("done");
-		assert 1 == 1;
 	}
 
 }
