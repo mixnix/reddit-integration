@@ -4,14 +4,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
 
-@Service
+//@Service
 public class RedditDataDTOConverter {
-    public RedditResponseDTO convertToRedditResponseDTO(RedditDataDTO redditDataDTO){
-        return new RedditResponseDTO(redditDataDTO.getData().stream().map(this::convertToString)
+    public static RedditResponseDTO convertToRedditResponseDTO(RedditDataDTO redditDataDTO){
+        return new RedditResponseDTO(redditDataDTO.getData().stream().map(RedditDataDTOConverter::convertToString)
                 .collect(Collectors.toList()));
     }
 
-    String convertToString(RedditSubmissionDTO redditSubmissionDTO){
+    static String convertToString(RedditSubmissionDTO redditSubmissionDTO){
         return redditSubmissionDTO.getUrl();
     }
 }

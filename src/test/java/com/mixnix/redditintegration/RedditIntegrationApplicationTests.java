@@ -5,6 +5,7 @@ import com.mixnix.redditintegration.api.pushshift.*;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,8 +20,9 @@ import java.util.Arrays;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-//@SpringBootTest
+
 @RunWith(SpringRunner.class)
+//@SpringBootTest
 @RestClientTest({PushshiftService.class, RedditIntegrationApplication.class})
 class RedditIntegrationApplicationTests {
 

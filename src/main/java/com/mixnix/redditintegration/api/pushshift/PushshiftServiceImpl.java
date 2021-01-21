@@ -1,20 +1,15 @@
 package com.mixnix.redditintegration.api.pushshift;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@RequiredArgsConstructor
 public class PushshiftServiceImpl implements PushshiftService{
 
     private final RestTemplate restTemplate;
-
-    private final RedditDataDTOConverter redditDataDTOConverter;
-
-    public PushshiftServiceImpl(RestTemplateBuilder restTemplateBuilder, RedditDataDTOConverter redditDataDTOConverter) {
-        this.restTemplate = restTemplateBuilder.build();
-        this.redditDataDTOConverter = redditDataDTOConverter;
-    }
 
     public RedditResponseDTO findByQuery(String queryString, int pageSize) {
         // query string can be anything because it searches by title and post content
@@ -23,7 +18,7 @@ public class PushshiftServiceImpl implements PushshiftService{
 
         RedditDataDTO redditDataDTO = restTemplate.getForObject(subredditSubmissionWithQuery, RedditDataDTO.class,
                 pageSize, queryString);
-        return redditDataDTOConverter.convertToRedditResponseDTO(redditDataDTO);
+        return RedditDataDTOConverter.convertToRedditResponseDTO(redditDataDTO);
     }
 
     public RedditResponseDTO downloadFromReddit(String subreddit, int pageSize) {
@@ -33,6 +28,6 @@ public class PushshiftServiceImpl implements PushshiftService{
 
         RedditDataDTO redditDataDTO = restTemplate.getForObject(subredditSubmissionWithQuery, RedditDataDTO.class,
                 pageSize, subreddit);
-        return redditDataDTOConverter.convertToRedditResponseDTO(redditDataDTO);
+        return RedditDataDTOConverter.convertToRedditResponseDTO(redditDataDTO);
     }
 }
