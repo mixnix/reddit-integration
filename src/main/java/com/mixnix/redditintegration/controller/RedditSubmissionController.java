@@ -44,7 +44,7 @@ public class RedditSubmissionController {
                 @Min(value=1, message="Minimum page size is 1")
                 @Max(value=100, message="Maximum page siez is 100") int pageSize
     ){
-        log.info("GET /api/memes/?subredditName={}", searchQuery);
+        log.info("GET /api/memes/?searchQuery={}", searchQuery);
 
         return ResponseEntity.ok().body(pushshiftService.findByQuery(searchQuery, pageSize));
     }
