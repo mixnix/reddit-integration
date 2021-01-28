@@ -1,4 +1,4 @@
-package com.mixnix.redditintegration.memes;
+package com.mixnix.redditintegration.domain.memes;
 
 import com.mixnix.redditintegration.api.pushshift.PushshiftService;
 import com.mixnix.redditintegration.api.pushshift.RedditResponseDTO;

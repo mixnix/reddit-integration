@@ -1,4 +1,4 @@
-package com.mixnix.redditintegration.memes;
+package com.mixnix.redditintegration.domain.memes;
 
 import lombok.NoArgsConstructor;
 
@@ -13,7 +13,7 @@ public class Meme {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    //todo: remember to validate them before saving
+    //todo: remember to validate them before saving to database
     private String url;
     //no need to save utc of meme because I will be saving this in another table
 
