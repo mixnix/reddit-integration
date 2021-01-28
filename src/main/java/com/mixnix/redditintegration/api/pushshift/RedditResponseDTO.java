@@ -6,6 +6,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Getter
+@Setter
 public class RedditResponseDTO {
     List<String> urls;
 }

@@ -1,11 +1,17 @@
 package com.mixnix.redditintegration.memes;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
+@NoArgsConstructor
 public class Meme {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     //todo: remember to validate them before saving
     private String url;
@@ -14,4 +20,8 @@ public class Meme {
     //later there will be tags here but for now I dont have anything like that
     //@ManyToMany
     //Set<Tag> tags;
+
+    public Meme(String url) {
+        this.url = url;
+    }
 }
