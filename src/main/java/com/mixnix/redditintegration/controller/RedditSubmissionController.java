@@ -2,7 +2,7 @@ package com.mixnix.redditintegration.controller;
 
 import com.mixnix.redditintegration.api.pushshift.PushshiftService;
 import com.mixnix.redditintegration.api.pushshift.RedditResponseDTO;
-import com.mixnix.redditintegration.memes.MemesDownloadService;
+import com.mixnix.redditintegration.domain.memes.MemesDownloadService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
