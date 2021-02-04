@@ -1,10 +1,8 @@
 package com.mixnix.redditintegration.api.pushshift;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mixnix.redditintegration.api.pushshift.PushshiftServiceImpl;
-import com.mixnix.redditintegration.api.pushshift.RedditDataDTO;
-import com.mixnix.redditintegration.api.pushshift.RedditResponseDTO;
-import com.mixnix.redditintegration.api.pushshift.RedditSubmissionDTO;
+import com.mixnix.redditintegration.api.pushshift.domain.UrlsResponseDTO;
+import com.mixnix.redditintegration.api.pushshift.service.PushshiftServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -61,7 +59,7 @@ public class PushshiftServiceIntegrationTest {
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(detailsString, MediaType.APPLICATION_JSON));
 
-		RedditResponseDTO testResponse = pushshiftService.findByQuery("testquery", 100);
+		UrlsResponseDTO testResponse = pushshiftService.findByQuery("testquery", 100);
 		server.verify();
 
 		Assert.assertEquals(testResponse.getUrls().get(0), "https://google.com");

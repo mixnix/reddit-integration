@@ -1,4 +1,4 @@
-package com.mixnix.redditintegration.api.pushshift;
+package com.mixnix.redditintegration.api.pushshift.domain;
 
 import lombok.*;
 
@@ -7,6 +7,6 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-public class RedditResponseDTO {
+public class UrlsResponseDTO {
     List<String> urls;
 }
