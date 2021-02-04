@@ -11,8 +11,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class DownloadingMemesScheduler {
 
     //todo: remember to populate database with initial DownloadingTask
+    //executes every minute
     @Scheduled(cron = "0 * * * * *")
     public void downloadPastMemes() {
+
 
     }
 
