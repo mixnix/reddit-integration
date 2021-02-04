@@ -1,8 +1,10 @@
 package com.mixnix.redditintegration.api.pushshift.service;
 
-import com.mixnix.redditintegration.api.pushshift.domain.UrlsResponseDTO;
+import com.mixnix.redditintegration.api.pushshift.domain.UrlResponseDTO;
+
+import java.util.List;
 
 public interface PushshiftService {
-    UrlsResponseDTO findByQuery(String queryString, int pageSize);
-    UrlsResponseDTO downloadFromReddit(String subreddit, int pageSize);
+    List<UrlResponseDTO> findByQuery(String queryString, int pageSize);
+    List<UrlResponseDTO> downloadFromReddit(String subreddit, int pageSize);
 }

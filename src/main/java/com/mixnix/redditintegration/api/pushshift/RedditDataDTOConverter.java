@@ -1,17 +1,16 @@
 package com.mixnix.redditintegration.api.pushshift;
 
-import com.mixnix.redditintegration.api.pushshift.domain.UrlsResponseDTO;
+import com.mixnix.redditintegration.api.pushshift.domain.UrlResponseDTO;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
-//@Service
 public class RedditDataDTOConverter {
-    public static UrlsResponseDTO convertToRedditResponseDTO(RedditDataDTO redditDataDTO){
-        return new UrlsResponseDTO(redditDataDTO.getData().stream().map(RedditDataDTOConverter::convertToString)
-                .collect(Collectors.toList()));
-    }
-
-    private static String convertToString(RedditSubmissionDTO redditSubmissionDTO){
-        return redditSubmissionDTO.getUrl();
+    public static List<UrlResponseDTO> convertToRedditResponseDTO(RedditDataDTO redditDataDTO){
+        return redditDataDTO
+                .getData()
+                .stream()
+                .map(e -> new UrlResponseDTO(e.getUrl(), e.getCreatedUtc()))
+                .collect(Collectors.toList());
     }
 }

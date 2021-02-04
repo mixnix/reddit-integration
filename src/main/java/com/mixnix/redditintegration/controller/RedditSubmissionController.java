@@ -1,7 +1,7 @@
 package com.mixnix.redditintegration.controller;
 
 import com.mixnix.redditintegration.api.pushshift.service.PushshiftService;
-import com.mixnix.redditintegration.api.pushshift.domain.UrlsResponseDTO;
+import com.mixnix.redditintegration.api.pushshift.domain.UrlResponseDTO;
 import com.mixnix.redditintegration.domain.memes.MemesDownloadService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +15,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -41,7 +42,7 @@ public class RedditSubmissionController {
     }
 
     @GetMapping
-    public ResponseEntity<UrlsResponseDTO> getMemes(
+    public ResponseEntity<List<UrlResponseDTO>> getMemes(
             @RequestParam @NotEmpty(message="Query string shouldn't be empty") String searchQuery,
             @RequestParam(defaultValue = "100")
                 @Min(value=1, message="Minimum page size is 1")
@@ -53,7 +54,7 @@ public class RedditSubmissionController {
     }
 
     @PostMapping
-    public ResponseEntity<UrlsResponseDTO> saveMemestoDatabase(
+    public ResponseEntity<List<UrlResponseDTO>> saveMemestoDatabase(
             @RequestParam @NotEmpty(message="Memes subreddit shouldn't be empty") String subreddit,
             @RequestParam(defaultValue = "100")
             @Min(value=1, message="Minimum page size is 1")

@@ -1,7 +1,7 @@
 package com.mixnix.redditintegration.api.pushshift;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mixnix.redditintegration.api.pushshift.domain.UrlsResponseDTO;
+import com.mixnix.redditintegration.api.pushshift.domain.UrlResponseDTO;
 import com.mixnix.redditintegration.api.pushshift.service.PushshiftServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
@@ -59,10 +60,10 @@ public class PushshiftServiceIntegrationTest {
 				.andExpect(method(HttpMethod.GET))
 				.andRespond(withSuccess(detailsString, MediaType.APPLICATION_JSON));
 
-		UrlsResponseDTO testResponse = pushshiftService.findByQuery("testquery", 100);
+		List<UrlResponseDTO> testResponse = pushshiftService.findByQuery("testquery", 100);
 		server.verify();
 
-		Assert.assertEquals(testResponse.getUrls().get(0), "https://google.com");
-		Assert.assertEquals(testResponse.getUrls().get(1), "https://facebook.com");
+		Assert.assertEquals(testResponse.get(0).getUrl(), "https://google.com");
+		Assert.assertEquals(testResponse.get(1).getUrl(), "https://facebook.com");
 	}
 }
